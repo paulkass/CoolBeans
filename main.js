@@ -1,5 +1,6 @@
 var aerospike = require('aerospike');
 var easypost = require('easypost');
+var express = require('express');
 var sys = require('sys');
 var http = require('http');
 var qs = require('querystring');
@@ -17,9 +18,9 @@ var http = http.createServer(function(req, res){
   switch (req.url) {
   case '/':
     res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write("<!DOCTYPE html><html><head><title>Cool Beans!</title></head>"
+    res.write("<!DOCTYPllE html><html><head><title>Cool Beans!</title></head>"
     +"<body><div id='signup'><h2>Sign Up!</h2>");
-    res.write("<form action='/signup' method='post'>"
+    res.write("<form action='/signup' name='signup_form' method='post'>"
     + "<input required type='text' name='full_name' placeholder='Full Name'/>"
     + "<input required type='email' name='user_email' placeholder='Email' />"
     + "<input required type='text' name='fav_type' placeholder='Favorite Coffe Type'/>"
@@ -29,16 +30,18 @@ var http = http.createServer(function(req, res){
     res.end();
   break;  
   case '/signup':
-    res.writeHead(200, {"Content-Type": "application/json"});
-    easypost.get(req, res, function(data) {
-<<<<<<< HEAD
-      var json = qs.parse(data);
-      res.write(json);
-=======
->>>>>>> e492b0e5fdda2f11373c45573ab47ab1d924b864
+    var body = "";
+    req.on('readable', function() {
+      body += req.read();
     });
-    res.end();
+    req.on('end', function() {
+      var fields = qs.parse(body);
+      res.writeHead({"Content-Type": "text/plain"});
+      res.write(fields.full_name);
+      res.end();
+    });
   break;
+
   }
 });
 http.listen(80);
