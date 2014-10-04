@@ -31,8 +31,11 @@ var http = http.createServer(function(req, res){
   case '/signup':
     res.writeHead(200, {"Content-Type": "application/json"});
     easypost.get(req, res, function(data) {
+<<<<<<< HEAD
       var json = qs.parse(data);
       res.write(json);
+=======
+>>>>>>> e492b0e5fdda2f11373c45573ab47ab1d924b864
     });
     res.end();
   break;
