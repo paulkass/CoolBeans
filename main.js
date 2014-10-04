@@ -25,7 +25,7 @@ var http = http.createServer(function(req, res){
     + "<input required type='text' name='fav_type' placeholder='Favorite Coffe Type'/>"
     + "<input required type='submit' value='SIGN UP!'/>"
     + "</form></div>");
-    res.write("</body></html>");
+    res.write("</body></html><div><p class="process_box">Cool beans are in your area</p></div>");
     res.end();
   break;  
   case '/signup':
