@@ -1,6 +1,5 @@
 var aerospike = require('aerospike');
 var easypost = require('easypost');
-var express = require('express');
 var sys = require('sys');
 var http = require('http');
 var qs = require('querystring');
@@ -26,22 +25,23 @@ var http = http.createServer(function(req, res){
     + "<input required type='text' name='fav_type' placeholder='Favorite Coffe Type'/>"
     + "<input required type='submit' value='SIGN UP!'/>"
     + "</form></div>");
-    res.write("</body></html><div><p class="process_box">Cool beans are in your area</p></div>");
+    res.write("</body></html>");
     res.end();
   break;  
   case '/signup':
+    res.writeHead(200, {"Content-Type": "text/plain"});
     var body = "";
     req.on('readable', function() {
       body += req.read();
     });
+    var field;
     req.on('end', function() {
       var fields = qs.parse(body);
-      res.writeHead({"Content-Type": "text/plain"});
-      res.write(fields.full_name);
-      res.end();
-    });
+      field = fields;
+      console.log(fields.fav_type);
+      res.end("Thanks");
+    }); 
   break;
-
   }
 });
 http.listen(80);
