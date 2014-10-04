@@ -2,6 +2,8 @@ var aerospike = require('aerospike');
 var easypost = require('easypost');
 var sys = require('sys');
 var http = require('http');
+var qs = require('querystring');
+
 
 var config = {
   hosts: [
@@ -27,9 +29,10 @@ var http = http.createServer(function(req, res){
     res.end();
   break;  
   case '/signup':
-    res.writeHead(200, {"Content-Type": "text/html"});
+    res.writeHead(200, {"Content-Type": "application/json"});
     easypost.get(req, res, function(data) {
-      res.
+      var json = qs.parse(data);
+      res.write(json);
     });
     res.end();
   break;
