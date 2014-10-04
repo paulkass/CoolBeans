@@ -29,7 +29,6 @@ var http = http.createServer(function(req, res){
   case '/signup':
     res.writeHead(200, {"Content-Type": "text/html"});
     easypost.get(req, res, function(data) {
-      res.
     });
     res.end();
   break;
