@@ -29,7 +29,6 @@ require('readline').createInterface({
    process.nextTick(function(){
      mod_line = line.substring(line.indexOf('{'), line.length);
      json_line = JSON.parse(mod_line);
-     //console.log(json_line.clientName);
      res.write("<p>"+json_line.clientName+"</p>");
      if (client_array[json_line.clientName]) {
        client_array[json_line.clientName]++;
@@ -43,24 +42,6 @@ require('readline').createInterface({
        if (error.status == aerospike.status.AEROSPIKEOK) {
          console.log(2895845-counter);
          counter++;
-         /* var rec_epoch;
-         client.select(key, ["testbin"], function(err, record){
-           var i = 0; //var json_record = record.replace("seenTimes:", "seenTimes: [");
-           // record = String.concat(json_record, "]");
-           
-              record = JSON.stringify(record);
-              record.replace('"time":', '"time": [');
-              record.concat(record, "]");
-              // console.log(record);
-           console.log(record);
-           //record = JSON.parse('{"bindings": [{"ircEvent": "PRIVMSG", "method": "newURI", "regex": "^http://.*"},{"ircEvent": "PRIVMSG", "method": "deleteURI", "regex": "^delete.*"}, {"ircEvent": "PRIVMSG", "method": "randomURI", "regex": "^random.*"}]}');
-           while(record.seenTimes.time[i]){
-             console.log("hi");
-             i++;
-           }
-         });
-         time_difference = Math.abs(json_line.seenEpoch-rec_epoch);
-         //console.log("hi"); */
        } 
        else if (error.code == 602) {  
          rec = {
